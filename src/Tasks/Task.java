@@ -1,5 +1,7 @@
 package Tasks;
 
+import java.util.Objects;
+
 public class Task {
     protected String name;
     protected String description;
@@ -44,6 +46,19 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return uid == task.uid && Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, uid, status);
     }
 
     @Override

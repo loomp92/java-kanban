@@ -20,14 +20,12 @@ public class Main {
 
         System.out.println(taskManager.getAllTask());
 
-//        taskManager.deleteAllTask();
 
         Task taskChecking1 = new Task("Таск 1", "Помыть посуду", 1, Status.IN_PROGRESS);
         Task taskChecking2 = new Task("Таск 2", "Сходить в магазин", 2, Status.IN_PROGRESS);
         Subtask subtaskChecking1 = new Subtask("Задача 1.1", "Помыть овощи", 4, Status.IN_PROGRESS,
                 3);
 
-//        taskManager.deleteSubtaskByID(4);
         taskManager.upDateSubtask(subtaskChecking1);
 
         taskManager.upDateTask(taskChecking1);
@@ -41,9 +39,7 @@ public class Main {
         taskManager.deleteEpicByID(3);
 
         System.out.println("сделали проверку 2");
-//        System.out.println((taskManager.getSubtaskByEpic(6)));
 
-//        System.out.println(taskManager.getAllTask());
 
     }
 }

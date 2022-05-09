@@ -2,6 +2,7 @@ package Tasks;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Epic extends Task {
 
@@ -45,6 +46,19 @@ public class Epic extends Task {
 
     public void deleteSubtask(int subtaskId) {
         subtasks.remove(subtaskId);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Epic epic = (Epic) o;
+        return Objects.equals(subtasks, epic.subtasks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subtasks);
     }
 
     @Override
