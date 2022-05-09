@@ -1,4 +1,6 @@
-public class Subtask extends Task{
+package Tasks;
+
+public class Subtask extends Task {
     int epicUid;
 
     public Subtask(String name, String description, int uid, Status status, int epicUid) {
@@ -16,7 +18,7 @@ public class Subtask extends Task{
 
     @Override
     public String toString() {
-        return "Subtask{" +
+        return "Tasks.Subtask{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", uid=" + uid +
