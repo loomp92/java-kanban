@@ -1,4 +1,4 @@
-import Manager.TaskManager;
+import Manager.InMemoryTaskManager;
 import Tasks.Status;
 import Tasks.Subtask;
 import Tasks.Task;
@@ -6,7 +6,7 @@ import Tasks.Task;
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
+        InMemoryTaskManager taskManager = new InMemoryTaskManager();
 
         taskManager.createNewTask("Таск 1", "Помыть посуду", Status.NEW);
         taskManager.createNewTask("Таск 2", "Сходить в магазин", Status.NEW);
@@ -39,7 +39,7 @@ public class Main {
         taskManager.deleteEpicByID(3);
 
         System.out.println("сделали проверку 2");
-
+        System.out.println(taskManager.getAllTask());
 
     }
 }

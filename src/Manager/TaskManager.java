@@ -4,114 +4,39 @@ import Tasks.Epic;
 import Tasks.Status;
 import Tasks.Subtask;
 import Tasks.Task;
-
 import java.util.Collection;
 import java.util.HashMap;
 
-public class TaskManager {
 
-    HashMap<Integer, Task> taskHashMap = new HashMap<>();
-    HashMap<Integer, Epic> epicHashMap = new HashMap<>();
-    HashMap<Integer, Subtask> subtaskHashMap = new HashMap<>();
-    private static int taskID = 0;
+interface TaskManager {
 
-    public int createNewTask(String name, String description, Status status) {
-        var uid = ++taskID;
-        Task task = new Task(name, description, uid, status);
-        taskHashMap.put(uid, task);
-        return uid;
-    }
+    int createNewTask(String name, String description, Status status);
 
-    public int createNewEpic(String name, String description) {
-        var uid = ++taskID;
-        Epic epic = new Epic(name, description, uid);
-        epicHashMap.put(uid, epic);
-        return uid;
-    }
+    int createNewEpic(String name, String description);
 
-    public int createNewSubtask(int epicUid, String name, String description, Status status) {
-        Epic epic = epicHashMap.getOrDefault(epicUid, null);
-        if (epic == null) {
-            return 0;
-        }
+    int createNewSubtask(int epicUid, String name, String description, Status status);
 
-        var uid = ++taskID;
-        Subtask subtask = new Subtask(name, description, uid, status, epicUid);
-        epic.addOrUpdateSubtask(subtask);
-        subtaskHashMap.put(uid, subtask);
+    void deleteAllTask();
 
-        return uid;
-    }
+    HashMap<Integer, Task> getAllTask();
 
-    public void deleteAllTask() {
-        taskHashMap.clear();
-        epicHashMap.clear();
-        subtaskHashMap.clear();
-    }
+    Task getTaskByID(int id);
 
-    public HashMap<Integer, Task> getAllTask() {
-        HashMap<Integer, Task> allTaskHashMaps = new HashMap<>();
-        allTaskHashMaps.putAll(taskHashMap);
-        allTaskHashMaps.putAll(epicHashMap);
-        return allTaskHashMaps;
-    }
+    Task deleteTaskByID(int id);
 
-    public Task getTaskByID(int id) {
-        return taskHashMap.getOrDefault(id, null);
-    }
+    void deleteEpicByID(int id);
 
-    public Task deleteTaskByID(int id) { //TODO сделать еще для 2х мап.
-        Task task = taskHashMap.getOrDefault(id, null);
-        if (task == null) {
-            return null;
-        }
-        return taskHashMap.remove(id);
-    }
+    void deleteSubtaskByID(int id);
 
-    public void deleteEpicByID(int id) {
-        Task task = epicHashMap.getOrDefault(id, null);
-        if (task == null) {
-            return;
-        }
-        Epic epic = epicHashMap.get(id);
-        subtaskHashMap.keySet().removeAll(epic.getSubtaskKeys());
-        epicHashMap.remove(id);
-    }
+    Task upDateTask(Task task);
 
-    public void deleteSubtaskByID(int id) {
+    Epic upDateEpic(Epic epic);
 
-        epicHashMap.get(subtaskHashMap.get(id).getEpicUid()).deleteSubtask(id);
-        subtaskHashMap.remove(id);
-    }
+    void upDateSubtask(Subtask subtask);
 
-    public Task upDateTask(Task task) {
-        if (!(taskHashMap.containsKey(task.getUid()))) {
-            return null;
-        }
-        return taskHashMap.replace(task.getUid(), task);
-    }
+    Collection<Subtask> getSubtaskByEpic(int epicId);
 
-    public Epic upDateEpic(Epic epic) {
-        if (!(epicHashMap.containsKey(epic.getUid()))) {
-            return null;
-        }
-        return epicHashMap.replace(epic.getUid(), epic);
-    }
+    Task getHistory();
 
-    public void upDateSubtask(Subtask subtask) {
-        if (!(subtaskHashMap.containsKey(subtask.getUid()))) {
-            System.out.println("Сабтаск не сцществует");
-            return;
-        }
-        epicHashMap.get(subtask.getEpicUid()).addOrUpdateSubtask(subtask);
-        subtaskHashMap.put(subtask.getEpicUid(), subtask);
-    }
-
-    public Collection<Subtask> getSubtaskByEpic(int epicId) {
-        Epic searchSubtask = epicHashMap.getOrDefault(epicId, null);
-        if (searchSubtask == null) {
-            return null;
-        }
-        return epicHashMap.get(epicId).getSubtasks();
-    }
+        
 }
