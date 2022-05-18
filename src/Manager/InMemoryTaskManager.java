@@ -5,14 +5,17 @@ import Tasks.Status;
 import Tasks.Subtask;
 import Tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
-    public class InMemoryTaskManager implements TaskManager {
+ class InMemoryTaskManager implements TaskManager {
 
     HashMap<Integer, Task> taskHashMap = new HashMap<>();
     HashMap<Integer, Epic> epicHashMap = new HashMap<>();
     HashMap<Integer, Subtask> subtaskHashMap = new HashMap<>();
+    List<Task> listHistory = new  ArrayList<>();
     private static int taskID = 0;
 
     @Override
@@ -63,7 +66,19 @@ import java.util.HashMap;
 
     @Override
     public Task getTaskByID(int id) {
-        return taskHashMap.getOrDefault(id, null);
+        Task task = taskHashMap.getOrDefault(id, null);
+        if ( task != null) {
+            updateHistory(task);
+        }
+
+        return task;
+    }
+
+    private void updateHistory(Task task) {
+        listHistory.add(task);
+        if(listHistory.size()>10){
+            listHistory.remove(0);
+        }
     }
 
     @Override
@@ -127,4 +142,10 @@ import java.util.HashMap;
         }
         return epicHashMap.get(epicId).getSubtasks();
     }
+
+    @Override
+    public List<Task> getHistory() {
+        return listHistory;
+    }
+
 }

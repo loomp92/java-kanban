@@ -6,9 +6,10 @@ import Tasks.Subtask;
 import Tasks.Task;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 
-interface TaskManager {
+public interface TaskManager {
 
     int createNewTask(String name, String description, Status status);
 
@@ -36,7 +37,7 @@ interface TaskManager {
 
     Collection<Subtask> getSubtaskByEpic(int epicId);
 
-    Task getHistory();
+    List<Task> getHistory();
 
-        
+
 }

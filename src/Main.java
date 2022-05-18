@@ -1,4 +1,5 @@
-import Manager.InMemoryTaskManager;
+import Manager.TaskManager;
+import Manager.Manager;
 import Tasks.Status;
 import Tasks.Subtask;
 import Tasks.Task;
@@ -6,7 +7,7 @@ import Tasks.Task;
 public class Main {
 
     public static void main(String[] args) {
-        InMemoryTaskManager taskManager = new InMemoryTaskManager();
+        TaskManager taskManager = Manager.getDefault();
 
         taskManager.createNewTask("Таск 1", "Помыть посуду", Status.NEW);
         taskManager.createNewTask("Таск 2", "Сходить в магазин", Status.NEW);
