@@ -4,9 +4,11 @@ import Tasks.Epic;
 import Tasks.Status;
 import Tasks.Subtask;
 import Tasks.Task;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public interface TaskManager {
@@ -19,9 +21,13 @@ public interface TaskManager {
 
     void deleteAllTask();
 
-    HashMap<Integer, Task> getAllTask();
+    Map<Integer, Task> getAllTask();
 
     Task getTaskByID(int id);
+
+    Epic getEpicByID(int id);
+
+    Subtask getSubTaskByID(int id);
 
     Task deleteTaskByID(int id);
 
@@ -38,6 +44,5 @@ public interface TaskManager {
     Collection<Subtask> getSubtaskByEpic(int epicId);
 
     List<Task> getHistory();
-
 
 }

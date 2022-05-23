@@ -8,15 +8,21 @@ import Tasks.Task;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
- class InMemoryTaskManager implements TaskManager {
+class InMemoryTaskManager implements TaskManager {
 
-    HashMap<Integer, Task> taskHashMap = new HashMap<>();
-    HashMap<Integer, Epic> epicHashMap = new HashMap<>();
-    HashMap<Integer, Subtask> subtaskHashMap = new HashMap<>();
-    List<Task> listHistory = new  ArrayList<>();
+    private final HashMap<Integer, Task> taskHashMap;
+    private final HashMap<Integer, Epic> epicHashMap;
+    private final HashMap<Integer, Subtask> subtaskHashMap;
+    HistoryManager historyManager;
     private static int taskID = 0;
+
+    public InMemoryTaskManager() {
+        this.taskHashMap = new HashMap<>();
+        this.subtaskHashMap = new HashMap<>();
+        this.epicHashMap = new HashMap<>();
+        historyManager = Managers.getDefaultHistory();
+    }
 
     @Override
     public int createNewTask(String name, String description, Status status) {
@@ -67,18 +73,31 @@ import java.util.List;
     @Override
     public Task getTaskByID(int id) {
         Task task = taskHashMap.getOrDefault(id, null);
-        if ( task != null) {
-            updateHistory(task);
+        if (task != null) {
+            historyManager.add(task);
         }
 
         return task;
     }
 
-    private void updateHistory(Task task) {
-        listHistory.add(task);
-        if(listHistory.size()>10){
-            listHistory.remove(0);
+    @Override
+    public Epic getEpicByID(int id) {
+        Epic epic = epicHashMap.getOrDefault(id, null);
+        if (epic != null) {
+            historyManager.add(epic);
         }
+
+        return epic;
+    }
+
+    @Override
+    public Subtask getSubTaskByID(int id) {
+        Subtask subtask = subtaskHashMap.getOrDefault(id, null);
+        if (subtask != null) {
+            historyManager.add(subtask);
+        }
+
+        return subtask;
     }
 
     @Override
@@ -144,8 +163,8 @@ import java.util.List;
     }
 
     @Override
-    public List<Task> getHistory() {
-        return listHistory;
+    public ArrayList<Task> getHistory() {
+        return historyManager.getHistory();
     }
 
 }

@@ -1,5 +1,5 @@
 import Manager.TaskManager;
-import Manager.Manager;
+import Manager.Managers;
 import Tasks.Status;
 import Tasks.Subtask;
 import Tasks.Task;
@@ -7,7 +7,7 @@ import Tasks.Task;
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager taskManager = Manager.getDefault();
+        TaskManager taskManager = Managers.getDefault();
 
         taskManager.createNewTask("Таск 1", "Помыть посуду", Status.NEW);
         taskManager.createNewTask("Таск 2", "Сходить в магазин", Status.NEW);
@@ -27,6 +27,9 @@ public class Main {
         Subtask subtaskChecking1 = new Subtask("Задача 1.1", "Помыть овощи", 4, Status.IN_PROGRESS,
                 3);
 
+        taskManager.getTaskByID(1);
+        taskManager.getTaskByID(2);
+        
         taskManager.upDateSubtask(subtaskChecking1);
 
         taskManager.upDateTask(taskChecking1);
@@ -42,5 +45,16 @@ public class Main {
         System.out.println("сделали проверку 2");
         System.out.println(taskManager.getAllTask());
 
+        printHistory(taskManager);
+    }
+
+    public static void printHistory(TaskManager taskManager) {
+        String[] list = taskManager.getHistory().toString().split("},");
+        StringBuilder result = new StringBuilder("История обращени к задачам: \n");
+        for (String line : list) {
+            result.append(line).append(".\n");
+        }
+        System.out.println(result);
     }
 }
+
