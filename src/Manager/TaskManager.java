@@ -6,7 +6,6 @@ import Tasks.Subtask;
 import Tasks.Task;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +42,6 @@ public interface TaskManager {
 
     Collection<Subtask> getSubtaskByEpic(int epicId);
 
-    List<Task> getHistory();
+    List<Task> getHistoryForMenu(); //Данный класс для вызова истории в Main
 
 }

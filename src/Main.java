@@ -29,7 +29,7 @@ public class Main {
 
         taskManager.getTaskByID(1);
         taskManager.getTaskByID(2);
-        
+
         taskManager.upDateSubtask(subtaskChecking1);
 
         taskManager.upDateTask(taskChecking1);
@@ -49,7 +49,7 @@ public class Main {
     }
 
     public static void printHistory(TaskManager taskManager) {
-        String[] list = taskManager.getHistory().toString().split("},");
+        String[] list = taskManager.getHistoryForMenu().toString().split("},");
         StringBuilder result = new StringBuilder("История обращени к задачам: \n");
         for (String line : list) {
             result.append(line).append(".\n");

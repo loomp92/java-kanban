@@ -5,23 +5,23 @@ import Tasks.Status;
 import Tasks.Subtask;
 import Tasks.Task;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 class InMemoryTaskManager implements TaskManager {
 
     private final HashMap<Integer, Task> taskHashMap;
     private final HashMap<Integer, Epic> epicHashMap;
     private final HashMap<Integer, Subtask> subtaskHashMap;
-    HistoryManager historyManager;
+    private final HistoryManager historyManager;
     private static int taskID = 0;
 
     public InMemoryTaskManager() {
         this.taskHashMap = new HashMap<>();
         this.subtaskHashMap = new HashMap<>();
         this.epicHashMap = new HashMap<>();
-        historyManager = Managers.getDefaultHistory();
+        this.historyManager = Managers.getDefaultHistory();
     }
 
     @Override
@@ -163,7 +163,7 @@ class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Task> getHistory() {
+    public List<Task> getHistoryForMenu() {
         return historyManager.getHistory();
     }
 
