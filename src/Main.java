@@ -18,30 +18,27 @@ public class Main {
         int epicId2 = taskManager.createNewEpic("Комплексная задача 2", "Сделать отчёт");
         taskManager.createNewSubtask(epicId2, "Задача 2.1", "Проанализировать данные", Status.NEW);
 
-        System.out.println(taskManager.getAllTask());
+        printAllTasks(taskManager);
 
         taskManager.getTaskByID(1);
         taskManager.getTaskByID(1);
-        taskManager.getTaskByID(3);
-        taskManager.getTaskByID(3);
-        taskManager.getTaskByID(1);
-        taskManager.getTaskByID(1);
-        taskManager.getTaskByID(1);
-        taskManager.getTaskByID(4);
-        taskManager.getTaskByID(3);
-        taskManager.getTaskByID(5);
-        taskManager.getTaskByID(3);
-        taskManager.getTaskByID(1);
+        taskManager.getTaskByID(2);
+        taskManager.getTaskByID(2);
+        taskManager.getSubTaskByID(5);
+        taskManager.getSubTaskByID(5);
+        taskManager.getSubTaskByID(6);
+        taskManager.getTaskByID(2);
+        taskManager.getEpicByID(3);
+        taskManager.getEpicByID(7);
 
         printHistory(taskManager);
-
-
         taskManager.deleteTaskByID(1);
-
-        taskManager.deleteEpicByID(4);
-
-        System.out.println(taskManager.getAllTask());
-
+        System.out.println("Уделил задачу 1");
+        printAllTasks(taskManager);
+        taskManager.deleteEpicByID(7);
+        System.out.println("Уделил эпик с 3 подзадачами");
+        printAllTasks(taskManager);
+        System.out.println("");
         printHistory(taskManager);
     }
 
@@ -50,6 +47,14 @@ public class Main {
         String[] list = taskManager.getHistoryForMenu().toString().split("},");
         StringBuilder result = new StringBuilder("История обращени к задачам: \n");
         for (String line : list) {
+            result.append(line).append(".\n");
+        }
+        System.out.println(result);
+    }
+    public static void printAllTasks(TaskManager taskManager) {
+        String[] array = taskManager.getAllTask().toString().split("},");
+        StringBuilder result = new StringBuilder("Список всех задач: \n");
+        for (String line : array) {
             result.append(line).append(".\n");
         }
         System.out.println(result);

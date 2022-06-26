@@ -86,7 +86,6 @@ class InMemoryTaskManager implements TaskManager {
         if (epic != null) {
             historyManager.add(epic);
         }
-
         return epic;
     }
 
