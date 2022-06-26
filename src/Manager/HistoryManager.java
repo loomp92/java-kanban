@@ -2,11 +2,14 @@ package Manager;
 
 import Tasks.Task;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface HistoryManager {
 
     void add(Task task);
 
-    List<Task> getHistory(); // данный класс в соответсвие в ТЗ
+    void remove(int id);
+
+    ArrayList<Task> getHistory();
+
 }

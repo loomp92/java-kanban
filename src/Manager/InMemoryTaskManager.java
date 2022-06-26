@@ -14,14 +14,14 @@ class InMemoryTaskManager implements TaskManager {
     private final HashMap<Integer, Task> taskHashMap;
     private final HashMap<Integer, Epic> epicHashMap;
     private final HashMap<Integer, Subtask> subtaskHashMap;
-    private final HistoryManager historyManager;
+    HistoryManager historyManager;
     private static int taskID = 0;
 
     public InMemoryTaskManager() {
         this.taskHashMap = new HashMap<>();
         this.subtaskHashMap = new HashMap<>();
         this.epicHashMap = new HashMap<>();
-        this.historyManager = Managers.getDefaultHistory();
+        historyManager = Managers.getDefaultHistory();
     }
 
     @Override

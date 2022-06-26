@@ -1,8 +1,6 @@
 import Manager.TaskManager;
 import Manager.Managers;
 import Tasks.Status;
-import Tasks.Subtask;
-import Tasks.Task;
 
 public class Main {
 
@@ -15,38 +13,38 @@ public class Main {
         int epicId = taskManager.createNewEpic("Комплексная задача 1", "Приготовить салат");
         taskManager.createNewSubtask(epicId, "Задача 1.1", "Помыть овощи", Status.NEW);
         taskManager.createNewSubtask(epicId, "Задача 1.2", "Порорезать овощи", Status.NEW);
+        taskManager.createNewSubtask(epicId, "Задача 1.3", "Сложить овощи в миску", Status.NEW);
 
         int epicId2 = taskManager.createNewEpic("Комплексная задача 2", "Сделать отчёт");
         taskManager.createNewSubtask(epicId2, "Задача 2.1", "Проанализировать данные", Status.NEW);
 
         System.out.println(taskManager.getAllTask());
 
-
-        Task taskChecking1 = new Task("Таск 1", "Помыть посуду", 1, Status.IN_PROGRESS);
-        Task taskChecking2 = new Task("Таск 2", "Сходить в магазин", 2, Status.IN_PROGRESS);
-        Subtask subtaskChecking1 = new Subtask("Задача 1.1", "Помыть овощи", 4, Status.IN_PROGRESS,
-                3);
-
         taskManager.getTaskByID(1);
-        taskManager.getTaskByID(2);
+        taskManager.getTaskByID(1);
+        taskManager.getTaskByID(3);
+        taskManager.getTaskByID(3);
+        taskManager.getTaskByID(1);
+        taskManager.getTaskByID(1);
+        taskManager.getTaskByID(1);
+        taskManager.getTaskByID(4);
+        taskManager.getTaskByID(3);
+        taskManager.getTaskByID(5);
+        taskManager.getTaskByID(3);
+        taskManager.getTaskByID(1);
 
-        taskManager.upDateSubtask(subtaskChecking1);
+        printHistory(taskManager);
 
-        taskManager.upDateTask(taskChecking1);
-        taskManager.upDateTask(taskChecking2);
-
-        System.out.println("сделали проверку 1");
-
-        System.out.println(taskManager.getAllTask());
 
         taskManager.deleteTaskByID(1);
-        taskManager.deleteEpicByID(3);
 
-        System.out.println("сделали проверку 2");
+        taskManager.deleteEpicByID(4);
+
         System.out.println(taskManager.getAllTask());
 
         printHistory(taskManager);
     }
+
 
     public static void printHistory(TaskManager taskManager) {
         String[] list = taskManager.getHistoryForMenu().toString().split("},");
