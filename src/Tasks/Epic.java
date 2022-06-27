@@ -19,9 +19,12 @@ public class Epic extends Task {
             return Status.NEW;
         }
 
-        boolean newTaskExists = subtasks.values().stream().anyMatch(subtask -> subtask.status == Status.NEW);
-        boolean doneTaskExists = subtasks.values().stream().anyMatch(subtask -> subtask.status == Status.DONE);
-        boolean inProgressTaskExists = subtasks.values().stream().anyMatch(subtask -> subtask.status == Status.IN_PROGRESS);
+        boolean newTaskExists = subtasks.values().stream()
+                .anyMatch(subtask -> subtask.status == Status.NEW);
+        boolean doneTaskExists = subtasks.values().stream()
+                .anyMatch(subtask -> subtask.status == Status.DONE);
+        boolean inProgressTaskExists = subtasks.values().stream()
+                .anyMatch(subtask -> subtask.status == Status.IN_PROGRESS);
 
         if (!doneTaskExists && !inProgressTaskExists) {
             return Status.NEW;

@@ -51,7 +51,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         return getTasks();
     }
 
-    public ArrayList<Task> getTasks() {
+   private ArrayList<Task> getTasks() {
         historyOfRequestsList.clear();
         if (head != null) {
             Node<Task> currentNode = head;
@@ -64,7 +64,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         return historyOfRequestsList;
     }
 
-    public void removeNode(Node<Task> node) {
+    private void removeNode(Node<Task> node) {
         if (node != null) {
             Node<Task> previousNode = node.getPrevious();
             Node<Task> nextNode = node.getNext();

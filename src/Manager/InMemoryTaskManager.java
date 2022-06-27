@@ -14,14 +14,14 @@ class InMemoryTaskManager implements TaskManager {
     private final HashMap<Integer, Task> taskHashMap;
     private final HashMap<Integer, Epic> epicHashMap;
     private final HashMap<Integer, Subtask> subtaskHashMap;
-    HistoryManager historyManager;
+    private final HistoryManager historyManager;
     private static int taskID = 0;
 
     public InMemoryTaskManager() {
         this.taskHashMap = new HashMap<>();
         this.subtaskHashMap = new HashMap<>();
         this.epicHashMap = new HashMap<>();
-        historyManager = Managers.getDefaultHistory();
+        this.historyManager = Managers.getDefaultHistory();
     }
 
     @Override
@@ -43,7 +43,6 @@ class InMemoryTaskManager implements TaskManager {
     @Override
     public int createNewSubtask(int epicUid, String name, String description, Status status) {
         Epic epic = epicHashMap.getOrDefault(epicUid, null);
-//        Epic epic1 = epicHashMap.get(epicUid);
         if (epic == null) {
             return 0;
         }
